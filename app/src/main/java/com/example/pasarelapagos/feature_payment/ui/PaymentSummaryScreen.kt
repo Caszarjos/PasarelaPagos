@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +29,7 @@ import com.example.pasarelapagos.shared.topappbar.PrevNextTopAppBar
 
 @Composable
 fun PaymentSummaryScreen(order: MutableState<Order>, navigateTo: () -> Unit) {
+
     Scaffold(
         topBar = {
             PrevNextTopAppBar("Checkout")
@@ -158,8 +160,10 @@ fun BottomProceedComponent(order: MutableState<Order>, navigateTo: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ){
             val item = order.value
+            item.total = (item.quantity.toDouble() * item.unitPrice.toDouble()).toString()
+
             Text(text = "Total", fontSize = 20.sp)
-            Text(text = "${ item.quantity.toDouble() * item.unitPrice.toDouble() }", fontSize = 20.sp)
+            Text(text = item.total, fontSize = 20.sp)
         }
         Button(onClick = { navigateTo() },
             modifier = Modifier

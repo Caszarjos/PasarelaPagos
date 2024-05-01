@@ -4,5 +4,6 @@ data class Order (
     val title: String,
     val description: String,
     val quantity: String,
-    val unitPrice: String
+    val unitPrice: String,
+    var total: String
 )
